@@ -153,20 +153,33 @@
             }
         }
 
-        // Count total files
-        function countFiles(contents) {
-            return Array.isArray(contents) ? 
-                contents.filter(item => item.type === 'file').length :
-                (contents.type === 'file' ? 1 : 0);
+        // Count total files recursively
+        async function countFiles(contents, owner, repo, branch) {
+            const items = Array.isArray(contents) ? contents : [contents];
+            let count = 0;
+            for (const item of items) {
+                if (item.type === 'file') {
+                    count++;
+                } else if (item.type === 'dir') {
+                    const response = await fetch(
+                        `https://api.github.com/repos/${owner}/${repo}/contents/${item.path}?ref=${branch}`
+                    );
+                    if (!response.ok) continue;
+                    const subContents = await response.json();
+                    count += await countFiles(subContents, owner, repo, branch);
+                }
+            }
+            return count;
         }
 
         // Process contents recursively
-        async function processContents(contents, currentPath, options) {
-            const items = Array.isArray(contents) ? contents : [contents];
+        async function processContents(items, currentPath, options) {
+            const entries = Array.isArray(items) ? items : [items];
 
-            for (const item of items) {
+            for (const item of entries) {
                 if (item.type === 'file') {
                     const response = await fetch(item.download_url);
+                    if (!response.ok) throw new Error(`Failed to download ${item.name}`);
                     const blob = await response.blob();
                     options.zip.file(currentPath + item.name, blob);
                     options.onProgress();
@@ -174,8 +187,9 @@
                     const response = await fetch(
                         `https://api.github.com/repos/${options.owner}/${options.repo}/contents/${item.path}?ref=${options.branch}`
                     );
-                    const contents = await response.json();
-                    await processContents(contents, currentPath + item.name + '/', options);
+                    if (!response.ok) throw new Error(`Failed to fetch directory: ${item.path}`);
+                    const subContents = await response.json();
+                    await processContents(subContents, currentPath + item.name + '/', options);
                 }
             }
         }
@@ -210,11 +224,12 @@
                 const zip = new JSZip();
 
                 const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`);
-                if (!response.ok) throw new Error('Failed to fetch folder contents');
+                if (!response.ok) throw new Error('Failed to fetch folder contents. Check the URL and try again.');
                 const contents = await response.json();
 
+                progressText.textContent = 'Counting files...';
                 let processed = 0;
-                const total = countFiles(contents);
+                const total = await countFiles(contents, owner, repo, branch);
 
                 await processContents(contents, '', {
                     owner,
