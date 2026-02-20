@@ -1,82 +1,71 @@
-# 📂 GitHub Folder Downloader
+# GitHub Folder Downloader
 
-[GitHub Folder Downloader](https://danielcregg.github.io/github-folder-downloader)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
 
-A sleek, modern web application that allows you to download any folder from a GitHub repository without cloning the entire repo. Built with vanilla JavaScript and modern web technologies, this tool provides a seamless experience for developers who need quick access to specific GitHub folders.
+A sleek, modern web application that allows you to download any folder from a GitHub repository without cloning the entire repo.
 
-## ✨ Features
+## Overview
 
-- 🚀 **One-Click Downloads**: Simply paste a GitHub folder URL and click download
-- 📦 **Smart ZIP Packaging**: Automatically maintains folder structure
-- 🎨 **Modern UI/UX**: Elegant design with smooth animations
-- 📱 **Responsive Design**: Works perfectly on both desktop and mobile
-- 🔄 **Progress Tracking**: Real-time download progress indication
-- 🔗 **URL Parameter Support**: Can be triggered via URL parameters
+GitHub Folder Downloader is a lightweight, client-side web tool built with vanilla JavaScript and modern web technologies. It uses the GitHub API to fetch folder contents recursively, packages them into a ZIP file, and delivers the download directly in the browser. No server-side processing or authentication is required. The tool is hosted on GitHub Pages and can also be triggered via URL parameters for easy integration.
 
-## 🚀 Quick Start
+**Live Demo:** [https://danielcregg.github.io/github-folder-downloader](https://danielcregg.github.io/github-folder-downloader)
 
-### Option 1: Direct Use
-Visit the live version: [GitHub Folder Downloader](https://danielcregg.github.io/github-folder-downloader)
+## Features
 
-### Option 2: Self-Host
-1. Download the `index.html` file
-2. Open it in any modern web browser
-3. Start downloading folders!
+- **One-Click Downloads** - Paste a GitHub folder URL and click download
+- **Smart ZIP Packaging** - Automatically maintains the original folder structure
+- **Modern UI/UX** - Elegant glassmorphism design with smooth animations
+- **Responsive Design** - Works on both desktop and mobile devices
+- **Progress Tracking** - Real-time download progress indication
+- **URL Parameter Support** - Trigger downloads via URL query parameters
 
-## 💡 Usage
+## Prerequisites
 
-1. **Basic Usage**:
-   Go to the below link and paste in the URL to the folder you wish to download.
+- A modern web browser (Chrome, Firefox, Safari, or Edge)
+- No installation required for the hosted version
+
+## Getting Started
+
+### Installation
+
+**Option 1: Use the hosted version**
+
+Visit [https://danielcregg.github.io/github-folder-downloader](https://danielcregg.github.io/github-folder-downloader)
+
+**Option 2: Self-host**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/danielcregg/github-folder-downloader.git
+   cd github-folder-downloader
    ```
-   https://danielcregg.github.io/github-folder-downloader/
-   ```
 
-3. **With URL Parameter**:
-   ```
-   https://danielcregg.github.io/github-folder-downloader/?url=https://github.com/user/repo/tree/main/folder
-   ```
+2. Open `index.html` in any modern web browser.
 
-## 🔧 Technical Details
+### Usage
 
-### Dependencies
-- JSZip (3.10.1)
-- FileSaver.js (2.0.5)
-- TailwindCSS (2.2.19)
-- Animate.css (4.1.1)
-- Inter Font Family
+**Basic Usage:**
 
-### Browser Support
-- Chrome (Latest)
-- Firefox (Latest)
-- Safari (Latest)
-- Edge (Latest)
+Navigate to the app and paste a GitHub folder URL into the input field, then click **Download**.
 
-## ⚡️ Performance
+**With URL Parameter:**
+```
+https://danielcregg.github.io/github-folder-downloader/?url=https://github.com/user/repo/tree/main/folder
+```
 
-- Lightweight (<100KB excluding dependencies)
-- No server-side processing required
-- Optimized for quick downloads
-- Efficient memory usage
+## Tech Stack
 
-## 🔒 Security
+- **HTML5** - Page structure
+- **CSS3 / TailwindCSS** - Styling with glassmorphism and gradient effects
+- **JavaScript (ES6)** - GitHub API interaction, ZIP generation, and download handling
+- **JSZip** - Client-side ZIP file creation
+- **FileSaver.js** - Browser-based file saving
+- **Animate.css** - UI animations
+- **GitHub Pages** - Static site hosting
 
-- Uses GitHub's public API
-- No authentication required
-- No data storage
-- All processing happens client-side
+## License
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 💖 Acknowledgments
-
-- GitHub for their public API
-- The amazing open-source community
-- All contributors and users of this tool
-
----
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
